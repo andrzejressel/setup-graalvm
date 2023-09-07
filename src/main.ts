@@ -150,7 +150,11 @@ async function run(): Promise<void> {
     }
     setUpNativeImageBuildReports(isGraalVMforJDK17OrLater, graalVMVersion)
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    if (error instanceof Error) {
+      core.setFailed(error)
+    } else {
+      core.setFailed(JSON.stringify(error))
+    }
   }
 }
 
